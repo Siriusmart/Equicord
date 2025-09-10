@@ -42,7 +42,6 @@ function restore(): void {
     if (ws !== undefined) {
         ws.close();
         ws = undefined;
-        generation++;
     }
 
     new Logger("DiscordProximity").log("Restored user volumes");
@@ -108,21 +107,16 @@ function bindWS(localGen: number): void {
             }
         };
 
-        // retry in 10 seconds
-        ws.onclose = () => {
-            ws = undefined;
-            restore();
-        };
-
-        ws.onerror = () => {
+        ws.onclose = ws.onerror = () => {
             if (generation !== localGen) {
                 ws = undefined;
                 restore();
             } else {
-                setTimeout(() => bindWS(localGen), 10000);
+                bindWS(localGen);
             }
         };
     } catch (e) {
+        // retry in 10 seconds
         ws = undefined;
         setTimeout(() => bindWS(localGen), 10000);
     }
@@ -207,7 +201,6 @@ export default definePlugin({
                         }
 
                         generation++;
-
                         restore();
                     }
                 } else {
