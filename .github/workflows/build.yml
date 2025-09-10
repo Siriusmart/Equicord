@@ -6,7 +6,8 @@ on:
 
 env:
     FORCE_COLOR: true
-    GITHUB_TOKEN: ${{ secrets.ETOKEN }}
+    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    EQUIBORED_PAT: ${{ secrets.EQUIBORED_PAT }}
     REPO: Siriusmart/Equibored
     USERNAME: GitHub-Actions
 
@@ -72,15 +73,16 @@ jobs:
               env:
                   GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-            - name: Upload Plugin JSONs to Equibored repo
-              run: |
-                  git config --global user.name "GitHub-Actions"
-                  git config --global user.email actions@github.com
-                  git clone https://$USERNAME:$GITHUB_TOKEN@github.com/$REPO.git plugins
-                  cd plugins
+            # - name: Upload Plugin JSONs to Equibored repo
+            #   run: |
+            #       git config --global user.name "GitHub-Actions"
+            #       git config --global user.email actions@github.com
+            #       git clone https://github.com/Siriusmart/Equibored plugins
+            #       cd plugins
 
-                  cp ../dist/release/*plugins.json .
-                  git add -A
+            #       cp ../dist/release/*plugins.json .
+            #       git add -A
 
-                  git commit -m "Plugins for https://github.com/$GITHUB_REPOSITORY/commit/$GITHUB_SHA"
-                  git push --force https://$USERNAME:$GITHUB_TOKEN@github.com/$REPO.git
+            #       git commit -m "Plugins for https://github.com/$GITHUB_REPOSITORY/commit/$GITHUB_SHA"
+            #       git config --unset-all http.https://github.com/.extraheader
+            #       git push --force
