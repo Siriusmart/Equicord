@@ -114,7 +114,7 @@ const settings = definePluginSettings({
     songLink: {
         description: "URL for the song to play",
         type: OptionType.STRING,
-        default: "https://github.com/Equicord/Equibored/raw/main/sounds/soggy/song.mp3?raw=true",
+        default: "https://github.com/Siriusmart/Equibored/raw/main/sounds/soggy/song.mp3?raw=true",
         onChange: (value: string) => {
             song = new Audio(value);
         }
@@ -122,7 +122,7 @@ const settings = definePluginSettings({
     boopLink: {
         description: "URL for the boop sound",
         type: OptionType.STRING,
-        default: "https://github.com/Equicord/Equibored/raw/main/sounds/soggy/honk.wav?raw=true",
+        default: "https://github.com/Siriusmart/Equibored/raw/main/sounds/soggy/honk.wav?raw=true",
         onChange: (value: string) => {
             boopSound = new Audio(value);
         }

@@ -25,7 +25,7 @@ function play() {
     clickCount++;
 
     if (clickCount % 10 === 0) {
-        const audio = new Audio("https://github.com/Equicord/Equibored/raw/main/sounds/equissant/croissant.mp3");
+        const audio = new Audio("https://github.com/Siriusmart/Equibored/raw/main/sounds/equissant/croissant.mp3");
         audio.play();
     }
 }
