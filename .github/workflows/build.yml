@@ -69,6 +69,8 @@ jobs:
             - name: Upload Equicord Stable
               run: |
                   gh release upload latest --clobber dist/release/*
+              env:
+                  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
             - name: Upload Plugin JSONs to Equibored repo
               run: |
