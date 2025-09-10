@@ -3,9 +3,9 @@
 // @description     A Discord client mod - Web version
 // @version         %version%
 // @author          Equicord (https://github.com/Equicord)
-// @namespace       https://github.com/Equicord/Equicord
-// @supportURL      https://github.com/Equicord/Equicord
-// @icon            https://raw.githubusercontent.com/Equicord/Equicord/refs/heads/main/browser/icon.png
+// @namespace       https://github.com/Siriusmart/Equicord
+// @supportURL      https://github.com/Siriusmart/Equicord
+// @icon            https://raw.githubusercontent.com/Siriusmart/Equicord/refs/heads/main/browser/icon.png
 // @license         GPL-3.0
 // @match           *://*.discord.com/*
 // @grant           GM_xmlhttpRequest
