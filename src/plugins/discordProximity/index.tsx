@@ -115,10 +115,12 @@ function bindWS(localGen: number): void {
                 bindWS(localGen);
             }
         };
+
+        return;
     } catch (e) {
-        // retry in 10 seconds
+        // retry in 5 seconds
         ws = undefined;
-        setTimeout(() => bindWS(localGen), 10000);
+        setTimeout(() => bindWS(localGen), 5000);
     }
 }
 
