@@ -30,21 +30,24 @@ const localVolumeGetter = findByPropsLazy("getLocalVolume");
 
 // undo everything the plugin has done
 function restore(): void {
+    let entries = Object.entries(originalVolumes);
     // resets user volume to how it was before starting the connection
-    for (const [user, volume] of Object.entries(originalVolumes)) {
+    for (const [user, volume] of entries) {
         localVolumeSetter.setLocalVolume(user, volume);
     }
 
     // clears this
     originalVolumes = {};
 
+    if(entries.length !== 0 || ws !== undefined) {
+        new Logger("DiscordProximity").log("Restored user volumes");
+    }
+
     // close any opened connections
     if (ws !== undefined) {
         ws.close();
         ws = undefined;
     }
-
-    new Logger("DiscordProximity").log("Restored user volumes");
 }
 
 // runs after connection opened
@@ -59,6 +62,7 @@ function bindWS(localGen: number): void {
     if (whosThereReverse[myId] === undefined) return;
 
     try {
+        new Logger("DiscordProximity").log("ws try bind");
         ws = new WebSocket("ws://127.0.0.1:25560/api/subscription");
         ws.onopen = function () {
             new Logger("DiscordProximity").log("Connected to proximity websocket.");
@@ -107,14 +111,13 @@ function bindWS(localGen: number): void {
             }
         };
 
-        ws.onclose = ws.onerror = () => {
-            if (generation !== localGen) {
-                ws = undefined;
-                restore();
-            } else {
-                bindWS(localGen);
+        ws.onclose = function () {
+            ws = undefined;
+            restore();
+            if (generation === localGen) {
+                setTimeout(() => bindWS(localGen), 5000);
             }
-        };
+        }
 
         return;
     } catch (e) {
