@@ -183,7 +183,7 @@ export default definePlugin({
                         // remove user from the vc he left
                         if (state.oldChannelId != null) {
                             delete whosThere[state.oldChannelId][state.userId];
-                            if (Object.keys(whosThere[state.oldChannelId]).length === 0) {
+                            if (whosThere[state.oldChannelId] !== undefined && Object.keys(whosThere[state.oldChannelId]).length === 0) {
                                 delete whosThere[state.oldChannelId];
                             }
                         }
